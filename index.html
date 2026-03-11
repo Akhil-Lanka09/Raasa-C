@@ -42,25 +42,55 @@ body {
 .nav-logo { display: flex; flex-direction: column; line-height: 1; }
 .nav-logo-main { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; font-style: italic; color: var(--saff3); letter-spacing: 1px; }
 .nav-logo-sub { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 4px; text-transform: uppercase; color: rgba(200,134,10,.6); margin-top: 1px; }
+
 .nav-tabs { display:flex; gap:5px; overflow-x: auto; white-space: nowrap; padding-bottom: 4px; }
 .nav-tabs::-webkit-scrollbar { height: 0px; }
-.nav-tab { padding: 8px 16px; border-radius: 4px; font-size: 0.75rem; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: rgba(245,217,138,.7); background: transparent; border: none; cursor: pointer; transition: all .2s; }
+.nav-tab {
+  padding: 8px 16px; border-radius: 4px; font-size: 0.75rem; font-weight: 500; letter-spacing: 1px;
+  text-transform: uppercase; color: rgba(245,217,138,.7); background: transparent; border: none; cursor: pointer; transition: all .2s;
+}
 .nav-tab:hover  { background: rgba(200,134,10,.12); color: var(--saff3); }
 .nav-tab.active { background: var(--saffron); color: var(--burg); font-weight: 600; }
 
+.nav-right { display:flex; align-items:center; gap:12px; }
+.nav-btn {
+  width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  background: rgba(245,217,138,.08); border: 1px solid rgba(245,217,138,.15); color: var(--saff3); cursor:pointer; transition:all .2s;
+}
+.nav-btn:hover { background: var(--saff2); color: var(--burg); border-color: var(--saff2); transform: scale(1.05); }
+
 /* ── PAGES ── */
-.page { display:none; padding-top: 80px; }
+.page { display:none; padding-top: 100px; padding-bottom: 80px; width: 90%; max-width: 1200px; margin: 0 auto; }
 .page.active { display:block; animation: fadeUp .4s ease; }
 @keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
 
-/* ── PROFILE MODAL STYLE ── */
-.profile-container { max-width: 600px; margin: 20px auto; background: var(--card); padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+/* ── CATALOGUE GRID ── */
+.cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; margin-top: 20px; }
+.product-card { background: var(--card); border: 1px solid var(--ivory2); padding: 16px; border-radius: 12px; transition: transform 0.3s; position: relative; }
+.product-card:hover { transform: translateY(-5px); border-color: var(--mint); }
+.product-img { width: 100%; height: 200px; background: var(--mintbg); border-radius: 8px; margin-bottom: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; color: var(--fern); font-size: 0.8rem; text-align: center; }
+.product-title { font-family: 'Cormorant Garamond'; font-size: 1.3rem; font-weight: 700; color: var(--burg); margin-bottom: 4px; }
+.product-tag { font-size: 0.65rem; text-transform: uppercase; color: var(--fern); background: var(--mint); padding: 2px 8px; border-radius: 10px; display: inline-block; margin-bottom: 8px; font-weight: 600; }
+.product-desc { font-size: 0.85rem; color: var(--tm); line-height: 1.4; margin-bottom: 12px; }
+.product-bottom { display: flex; justify-content: space-between; align-items: center; }
+.product-price { font-family: 'DM Mono'; font-weight: 600; color: var(--spice); }
+.btn-order { background: var(--forest); color: var(--wh); border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; font-weight: 500; transition: background 0.2s; }
+.btn-order:hover { background: var(--fern); }
+
+/* ── PROFILE STYLES ── */
+.profile-card { background: var(--card); padding: 30px; border-radius: 16px; box-shadow: 0 10px 30px rgba(59,13,13,0.05); }
 .field-group { margin-bottom: 20px; }
-.field-label { display: block; font-weight: 500; margin-bottom: 8px; color: var(--burg); }
-.field-input { width: 100%; padding: 12px; border: 1px solid var(--mint); border-radius: 6px; font-family: 'Jost', sans-serif; }
-.btn-save { background: var(--saffron); color: var(--wh); border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-weight: 600; width: 100%; transition: background 0.3s; }
+.field-label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--tm); margin-bottom: 6px; }
+.field-input { width: 100%; padding: 12px; border: 1px solid var(--ivory2); border-radius: 8px; background: var(--ivory); font-family: inherit; font-size: 0.9rem; }
+.field-input:focus { outline: 1px solid var(--saffron); background: var(--wh); }
+.btn-save { background: var(--saffron); color: var(--wh); border: none; padding: 14px; border-radius: 8px; font-weight: 600; cursor: pointer; width: 100%; margin-top: 10px; transition: background 0.3s; }
 .btn-save:hover { background: var(--saff2); }
 .btn-save:disabled { background: #ccc; cursor: not-allowed; }
+
+/* ── FOOTER ── */
+.footer { padding: 40px 5vw; background: var(--burg); color: var(--saff4); text-align: center; margin-top: 40px; }
+.footer-logo { font-family: 'Cormorant Garamond'; font-size: 1.8rem; font-style: italic; color: var(--saff3); }
+
 </style>
 </head>
 <body>
@@ -71,40 +101,100 @@ body {
     <div class="nav-logo-sub">Hyderabad</div>
   </div>
   <div class="nav-tabs">
-    <button class="nav-tab active">Profile</button>
+    <button class="nav-tab active" onclick="showPage('home')">Home</button>
+    <button class="nav-tab" onclick="showPage('catalogue')">Catalogue</button>
+    <button class="nav-tab" onclick="showPage('profile')">My Profile</button>
   </div>
 </nav>
 
-<div class="page active">
-  <div class="profile-container">
-    <h2 style="margin-bottom: 20px; font-family: 'Cormorant Garamond'; color: var(--burg);">Customer Profile</h2>
+<div id="home" class="page active">
+  <div style="text-align: center; padding: 40px 0;">
+    <h1 style="font-family: 'Cormorant Garamond'; font-size: 3rem; color: var(--burg);">Pure. Fresh. Local.</h1>
+    <p style="color: var(--tm); max-width: 600px; margin: 20px auto;">Premium HMT Rice, Pure Buffalo Ghee, and Natural Honey delivered to your doorstep in Hyderabad.</p>
+    <button class="btn-order" style="padding: 15px 30px; font-size: 1rem; margin-top: 20px;" onclick="showPage('catalogue')">View Catalogue</button>
+  </div>
+</div>
+
+<div id="catalogue" class="page">
+  <h2 style="font-family: 'Cormorant Garamond'; font-size: 2rem; color: var(--burg); margin-bottom: 20px;">Fresh Harvest</h2>
+  <div class="cat-grid">
+    <div class="product-card">
+      <span class="product-tag">Ghee</span>
+      <div class="product-img">Pure Buffalo Ghee<br>(Glass Bottle)</div>
+      <h3 class="product-title">Buffalo Ghee</h3>
+      <p class="product-desc">Authentic, grainy texture ghee made from pure buffalo milk. 1 Litre / 930 Grams.</p>
+      <div class="product-bottom">
+        <span class="product-price">Premium Quality</span>
+        <button class="btn-order">Order</button>
+      </div>
+    </div>
+    <div class="product-card">
+      <span class="product-tag">Rice</span>
+      <div class="product-img">Premium HMT Rice</div>
+      <h3 class="product-title">HMT Quality Rice</h3>
+      <p class="product-desc">Fine-grained, aged HMT rice perfect for daily meals. Available in 25kg bags.</p>
+      <div class="product-bottom">
+        <span class="product-price">Aged 12+ Months</span>
+        <button class="btn-order">Order</button>
+      </div>
+    </div>
+    <div class="product-card">
+      <span class="product-tag">Honey</span>
+      <div class="product-img">Natural Raw Honey</div>
+      <h3 class="product-title">Raw Forest Honey</h3>
+      <p class="product-desc">Unprocessed, natural honey sourced directly from harvest points.</p>
+      <div class="product-bottom">
+        <span class="product-price">100% Pure</span>
+        <button class="btn-order">Order</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="profile" class="page">
+  <div class="profile-card" style="max-width: 500px; margin: 0 auto;">
+    <h2 style="font-family: 'Cormorant Garamond'; color: var(--burg); margin-bottom: 20px;">Customer Details</h2>
     
     <div class="field-group">
       <label class="field-label" for="edName">Full Name</label>
-      <input class="field-input" type="text" id="edName" name="Customer_Name" placeholder="Enter your name">
+      <input class="field-input" type="text" id="edName" placeholder="Enter your name">
     </div>
+    
     <div class="field-group">
       <label class="field-label" for="edPhone">WhatsApp No.</label>
-      <input class="field-input" type="text" id="edPhone" name="WhatsApp_Number" placeholder="91XXXXXXXXXX">
+      <input class="field-input" type="text" id="edPhone" placeholder="e.g., 91XXXXXXXXXX">
     </div>
+    
     <div class="field-group">
       <label class="field-label" for="edEmail">Email Address</label>
-      <input class="field-input" type="email" id="edEmail" name="Email" placeholder="your@email.com">
+      <input class="field-input" type="email" id="edEmail" placeholder="your@email.com">
     </div>
+    
     <div class="field-group">
       <label class="field-label" for="edAddr">Delivery Address</label>
-      <textarea class="field-input" id="edAddr" name="Address" rows="3" placeholder="Street, Area, Landmark, Hyderabad"></textarea>
+      <textarea class="field-input" id="edAddr" rows="3" placeholder="Flat No, Street, Area, Landmark, Hyderabad"></textarea>
     </div>
 
     <button class="btn-save" id="saveBtn" onclick="sendDataToSheet()">Save Changes</button>
   </div>
 </div>
 
+<footer class="footer">
+  <div class="footer-logo">Raasa Harvest</div>
+  <p style="margin-top: 10px; font-size: 0.8rem; color: rgba(245,217,138,.6);">Serving Hyderabad with Purity.</p>
+</footer>
+
 <script>
-  /**
-   * 1. PASTE YOUR DEPLOYED WEB APP URL HERE
-   * You get this after clicking "Deploy > New Deployment" in Google Apps Script.
-   */
+  // Navigation Function
+  function showPage(pageId) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    
+    document.getElementById(pageId).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+
+  // Google Sheets Logic
   const scriptURL = 'https://script.google.com/macros/s/AKfycbzOhL8Tm-S-L3qYlQ6RzSpbw5P36_9iuF_mEBfzw2ZwRqaf1SrrNJA_j7JOW7VsLTkp9w/exec';
 
   function sendDataToSheet() {
@@ -114,7 +204,6 @@ body {
     const email = document.getElementById('edEmail').value;
     const address = document.getElementById('edAddr').value;
 
-    // Basic Validation
     if (!name || !phone) {
       alert("Please fill in your Name and WhatsApp Number.");
       return;
@@ -123,23 +212,21 @@ body {
     saveBtn.innerHTML = "Saving...";
     saveBtn.disabled = true;
 
-    // Prepare data to match your Google Sheet headers
     const formData = new FormData();
     formData.append('Customer_Name', name);
     formData.append('WhatsApp_Number', phone);
     formData.append('Email', email);
     formData.append('Address', address);
 
-    // Send data to Google Apps Script
     fetch(scriptURL, { method: 'POST', body: formData })
       .then(response => {
-        alert('Success! Your details have been saved to Raasa Harvest.');
+        alert('Success! Your details are saved to the Raasa Harvest database.');
         saveBtn.innerHTML = "Save Changes";
         saveBtn.disabled = false;
       })
       .catch(error => {
         console.error('Error!', error.message);
-        alert('Error saving data. Please check your connection or Script URL.');
+        alert('Error saving data. Please check your connection.');
         saveBtn.innerHTML = "Save Changes";
         saveBtn.disabled = false;
       });
