@@ -52,13 +52,6 @@ body {
 .nav-tab:hover  { background: rgba(200,134,10,.12); color: var(--saff3); }
 .nav-tab.active { background: var(--saffron); color: var(--burg); font-weight: 600; }
 
-.nav-right { display:flex; align-items:center; gap:12px; }
-.nav-btn {
-  width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center;
-  background: rgba(245,217,138,.08); border: 1px solid rgba(245,217,138,.15); color: var(--saff3); cursor:pointer; transition:all .2s;
-}
-.nav-btn:hover { background: var(--saff2); color: var(--burg); border-color: var(--saff2); transform: scale(1.05); }
-
 /* ── PAGES ── */
 .page { display:none; padding-top: 100px; padding-bottom: 80px; width: 90%; max-width: 1200px; margin: 0 auto; }
 .page.active { display:block; animation: fadeUp .4s ease; }
@@ -101,9 +94,9 @@ body {
     <div class="nav-logo-sub">Hyderabad</div>
   </div>
   <div class="nav-tabs">
-    <button class="nav-tab active" onclick="showPage('home')">Home</button>
-    <button class="nav-tab" onclick="showPage('catalogue')">Catalogue</button>
-    <button class="nav-tab" onclick="showPage('profile')">My Profile</button>
+    <button class="nav-tab active" id="tab-home" onclick="showPage('home', 'tab-home')">Home</button>
+    <button class="nav-tab" id="tab-catalogue" onclick="showPage('catalogue', 'tab-catalogue')">Catalogue</button>
+    <button class="nav-tab" id="tab-profile" onclick="showPage('profile', 'tab-profile')">My Profile</button>
   </div>
 </nav>
 
@@ -111,7 +104,7 @@ body {
   <div style="text-align: center; padding: 40px 0;">
     <h1 style="font-family: 'Cormorant Garamond'; font-size: 3rem; color: var(--burg);">Pure. Fresh. Local.</h1>
     <p style="color: var(--tm); max-width: 600px; margin: 20px auto;">Premium HMT Rice, Pure Buffalo Ghee, and Natural Honey delivered to your doorstep in Hyderabad.</p>
-    <button class="btn-order" style="padding: 15px 30px; font-size: 1rem; margin-top: 20px;" onclick="showPage('catalogue')">View Catalogue</button>
+    <button class="btn-order" style="padding: 15px 30px; font-size: 1rem; margin-top: 20px;" onclick="showPage('catalogue', 'tab-catalogue')">View Catalogue</button>
   </div>
 </div>
 
@@ -154,27 +147,22 @@ body {
 <div id="profile" class="page">
   <div class="profile-card" style="max-width: 500px; margin: 0 auto;">
     <h2 style="font-family: 'Cormorant Garamond'; color: var(--burg); margin-bottom: 20px;">Customer Details</h2>
-    
     <div class="field-group">
       <label class="field-label" for="edName">Full Name</label>
       <input class="field-input" type="text" id="edName" placeholder="Enter your name">
     </div>
-    
     <div class="field-group">
       <label class="field-label" for="edPhone">WhatsApp No.</label>
       <input class="field-input" type="text" id="edPhone" placeholder="e.g., 91XXXXXXXXXX">
     </div>
-    
     <div class="field-group">
       <label class="field-label" for="edEmail">Email Address</label>
       <input class="field-input" type="email" id="edEmail" placeholder="your@email.com">
     </div>
-    
     <div class="field-group">
       <label class="field-label" for="edAddr">Delivery Address</label>
       <textarea class="field-input" id="edAddr" rows="3" placeholder="Flat No, Street, Area, Landmark, Hyderabad"></textarea>
     </div>
-
     <button class="btn-save" id="saveBtn" onclick="sendDataToSheet()">Save Changes</button>
   </div>
 </div>
@@ -185,16 +173,15 @@ body {
 </footer>
 
 <script>
-  // Navigation Function
-  function showPage(pageId) {
+  // Navigation Handler
+  function showPage(pageId, tabId) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-    
     document.getElementById(pageId).classList.add('active');
-    event.currentTarget.classList.add('active');
+    document.getElementById(tabId).classList.add('active');
   }
 
-  // Google Sheets Logic
+  // Google Sheets Connection logic
   const scriptURL = 'https://script.google.com/macros/s/AKfycbzOhL8Tm-S-L3qYlQ6RzSpbw5P36_9iuF_mEBfzw2ZwRqaf1SrrNJA_j7JOW7VsLTkp9w/exec';
 
   function sendDataToSheet() {
@@ -213,6 +200,7 @@ body {
     saveBtn.disabled = true;
 
     const formData = new FormData();
+    // These keys match the headers in your Google Sheet
     formData.append('Customer_Name', name);
     formData.append('WhatsApp_Number', phone);
     formData.append('Email', email);
@@ -226,7 +214,7 @@ body {
       })
       .catch(error => {
         console.error('Error!', error.message);
-        alert('Error saving data. Please check your connection.');
+        alert('There was an error saving your data. Please check your connection.');
         saveBtn.innerHTML = "Save Changes";
         saveBtn.disabled = false;
       });
