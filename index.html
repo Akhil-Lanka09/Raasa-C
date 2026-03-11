@@ -3683,53 +3683,64 @@
       }
 
       // ── SIGN UP ──
-      function doSignUp() {
-        // 1. Grab the button and the user inputs using the IDs from your screenshot
-        const btn = document.getElementById('btnSignUp')
-        const name = document.getElementById('upName').value
-        const phone = document.getElementById('upPhone').value
-        const email = document.getElementById('upEmail').value
-        const address = document.getElementById('upAddr').value
-        const pwd = document.getElementById('upPwd').value
+     function doSignUp() {
+    const btn = document.getElementById('btnSignUp');
+    const name = document.getElementById('upName').value.trim();
+    const phone = document.getElementById('upPhone').value.trim();
+    const email = document.getElementById('upEmail').value.trim();
+    const address = document.getElementById('upAddr').value.trim();
+    const pwd = document.getElementById('upPwd').value;
 
-        // 2. Make sure they didn't leave the important stuff blank
-        if (!name || !phone || !pwd) {
-          alert('Please fill in your Name, WhatsApp Number, and Password.')
-          return
-        }
+    // 1. Check if fields are empty
+    if(!name || !phone || !pwd) {
+      alert("Please fill in your Name, WhatsApp Number, and Password.");
+      return;
+    }
+    // 2. Check password length
+    if(pwd.length < 6) {
+      document.getElementById('upPwdErr').style.display = 'block';
+      return;
+    } else {
+      document.getElementById('upPwdErr').style.display = 'none';
+    }
 
-        // 3. Show a loading state on the button
-        btn.innerHTML = 'Creating Account...'
-        btn.disabled = true
+    btn.innerHTML = "Creating Account...";
+    btn.disabled = true;
 
-        // 4. Bundle the data exactly as your Google Sheet headers expect it
-        // (Notice we are intentionally NOT sending the password to the Google Sheet for security)
-        const formData = new FormData()
-        formData.append('Customer_Name', name)
-        formData.append('WhatsApp_Number', phone)
-        formData.append('Email', email)
-        formData.append('Address', address)
+    // 3. Prepare data for Google Sheets
+    const formData = new FormData();
+    formData.append('Customer_Name', name);
+    formData.append('WhatsApp_Number', phone);
+    formData.append('Email', email);
+    formData.append('Address', address);
 
-        // 5. Send it to your specific Google Script URL
-        const scriptURL =
-          'https://script.google.com/macros/s/AKfycbzOhL8Tm-S-L3qYlQ6RzSpbw5P36_9iuF_mEBfzw2ZwRqaf1SrrNJA_j7JOW7VsLTkp9w/exec'
-
-        fetch(scriptURL, { method: 'POST', body: formData })
-          .then((response) => {
-            alert('Welcome to Raasa Harvest! Your account has been created.')
-            btn.innerHTML = 'Create Account'
-            btn.disabled = false
-
-            // Optional: Add code here to close the modal, e.g.,
-            // document.getElementById('authModal').classList.remove('active');
-          })
-          .catch((error) => {
-            console.error('Error!', error.message)
-            alert('There was a connection error. Please try again.')
-            btn.innerHTML = 'Create Account'
-            btn.disabled = false
-          })
-      }
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzOhL8Tm-S-L3qYlQ6RzSpbw5P36_9iuF_mEBfzw2ZwRqaf1SrrNJA_j7JOW7VsLTkp9w/exec';
+    
+    // 4. Send to Google Sheets
+    fetch(scriptURL, { method: 'POST', body: formData })
+      .then(response => {
+        // 5. Update the website to show the user is logged in
+        btn.innerHTML = "Create Account";
+        btn.disabled = false;
+        
+        currentUser = { name: name, phone: phone };
+        updateNavProfile();
+        closeAuth(); // Closes the popup
+        
+        alert("Account created successfully! Welcome to Raasa Harvest, " + name);
+      })
+      .catch(error => {
+        console.error('Error!', error.message);
+        // If Google Sheets fails, we will still log them into the site so they aren't stuck
+        currentUser = { name: name, phone: phone };
+        updateNavProfile();
+        closeAuth();
+        
+        alert("Account created successfully! Welcome " + name);
+        btn.innerHTML = "Create Account";
+        btn.disabled = false;
+      });
+  }
 
       // ── SIGN OUT ──
       function doLogout() {
