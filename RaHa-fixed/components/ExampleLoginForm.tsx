@@ -15,7 +15,7 @@ export function ExampleLoginForm() {
     address: '',
   });
 
-  const { isLoading, error, success, logUser, reset } = useGoogleSheetsLogger();
+  const { isLoading, error, success, log: logUser, reset } = useGoogleSheetsLogger();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
