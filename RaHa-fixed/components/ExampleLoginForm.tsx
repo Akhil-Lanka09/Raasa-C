@@ -29,7 +29,7 @@ export function ExampleLoginForm() {
     e.preventDefault();
 
     // Log user data to Google Sheets
-    const success = await logUser(formData);
+    const success = await logUser({ ...formData, type: 'signup', status: 'success' });
 
     if (success) {
       // Clear form after successful submission
