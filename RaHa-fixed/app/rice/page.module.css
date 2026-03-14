@@ -4,13 +4,8 @@
   position: relative;
   overflow: hidden;
   background:
-    linear-gradient(
-      135deg,
-      rgba(40, 10, 5, 0.84) 0%,
-      rgba(65, 18, 8, 0.84) 100%
-    ),
-    url('https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6?w=1400&q=80')
-      center/cover no-repeat;
+    linear-gradient(135deg, rgba(40,10,5,0.84) 0%, rgba(65,18,8,0.84) 100%),
+    url('https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6?w=1400&q=80') center/cover no-repeat;
   min-height: 340px;
   display: flex;
   flex-direction: column;
@@ -23,13 +18,8 @@
   position: relative;
   overflow: hidden;
   background:
-    linear-gradient(
-      135deg,
-      rgba(15, 40, 28, 0.88) 0%,
-      rgba(25, 52, 40, 0.88) 100%
-    ),
-    url('https://images.unsplash.com/photo-1540420773420-3366772f4999?w=1400&q=80')
-      center/cover no-repeat;
+    linear-gradient(135deg, rgba(15,40,28,0.88) 0%, rgba(25,52,40,0.88) 100%),
+    url('https://images.unsplash.com/photo-1540420773420-3366772f4999?w=1400&q=80') center/cover no-repeat;
   min-height: 340px;
   display: flex;
   flex-direction: column;
@@ -42,11 +32,7 @@
   position: relative;
   overflow: hidden;
   background:
-    linear-gradient(
-      135deg,
-      rgba(80, 30, 5, 0.92) 0%,
-      rgba(110, 45, 10, 0.92) 100%
-    ),
+    linear-gradient(135deg, rgba(80,30,5,0.92) 0%, rgba(110,45,10,0.92) 100%),
     #3a1200;
   min-height: 340px;
   display: flex;
@@ -56,7 +42,7 @@
 
 .infoStrip {
   background: var(--card);
-  border-bottom: 1px solid rgba(59, 13, 13, 0.08);
+  border-bottom: 1px solid rgba(59,13,13,0.08);
   padding: 20px 5vw;
   display: flex;
   gap: 40px;
@@ -106,7 +92,7 @@
 
 .orderNoteInner {
   background: var(--saff4);
-  border: 1px solid rgba(200, 134, 10, 0.2);
+  border: 1px solid rgba(200,134,10,0.2);
   border-radius: 6px;
   padding: 16px 24px;
   display: flex;
